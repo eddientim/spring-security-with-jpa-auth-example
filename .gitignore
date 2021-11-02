@@ -13,6 +13,9 @@
 # lib file
 lib
 
+# ignore target file
+target
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
