@@ -2,40 +2,35 @@ package springsecurity.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 class HomePageControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    HomePageController homePageController;
 
     @Test
-    public void shouldReturnHomepageResponse() throws Exception {
-        this.mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Homepage")));
+    public void shouldReturnHomepageResponse() {
+
+        String homepage = homePageController.homepage();
+
+        assertEquals(homepage, "<h1>Homepage</h1>");
     }
 
     @Test
-    public void shouldReturnUserResponse() throws Exception {
-        this.mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello User")));
+    public void shouldReturnUserResponse() {
+        String adminUser = homePageController.adminUser();
+
+        assertEquals(adminUser, "<h1>Welcome Admin User</h1>");
     }
 
     @Test
-    public void shouldReturnAdminResponse() throws Exception {
-        this.mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Welcome Admin User")));
+    public void shouldReturnAdminResponse() {
+        String user = homePageController.userLogin();
+
+        assertEquals(user, "<h1>Hello User</h1>");
     }
 }
